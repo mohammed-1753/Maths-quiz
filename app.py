@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, session, redirect
 import random
+import os  # Add os import
 import logging  # Add logging import
 
 app = Flask(__name__)
@@ -19,7 +20,7 @@ def generate_question():
     elif operator == '*':
         answer = num1 * num2
     elif operator == '/':
-        num2 = random.randint(1, 10)
+        num2 = random.randint(1, 10)  # Ensure non-zero divisor
         answer = round(num1 / num2, 2)
     question = f"What is {num1} {operator} {num2}?"
     return question, answer
@@ -52,5 +53,8 @@ def home():
                 session['answer'] = answer
         return render_template("index.html", question=session['question'], score=session['score'])
     except Exception as e:
-        app.logger.error(f"Error in home route: {str(e)}", exc_info=True)  # Log the full stack trace
+        app.logger.error(f"Error in home route: {str(e)}", exc_info=True)  # Log full stack trace
         return "Internal Server Error: Check server logs for details", 500
+
+if __name__ == "__main__":
+    app.run(debug=True)
