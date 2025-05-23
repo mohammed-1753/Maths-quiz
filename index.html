@@ -78,16 +78,13 @@
             margin-top: 0.5rem;
         }
     </style>
-</head>
 <body>
     <h1>Math Quiz Game</h1>
     <p>{{ question }}</p>
-
-    <form method="POST">
-        <input type="text" name="answer" placeholder="Your answer" required>
-        <button type="submit">Submit</button>
+    <form method="POST" action="/">
+        <input type="text" name="answer" placeholder="Enter your answer" required>
+        <input type="submit" value="Submit">
     </form>
-
     <p>Score: {{ score }}</p>
     {% if message %}
         <p style="color: red;">{{ message }}</p>
